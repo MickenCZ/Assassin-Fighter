@@ -23,7 +23,8 @@ class Sprite {
       offset: offset,
       width: 100,
       height: 50,
-    }
+    },
+    this.health = 100
     this.isAttacking
   }
 
@@ -145,13 +146,15 @@ function animate() {
   if (rectangularCollision({rectangle1:player, rectangle2:enemy}) && 
   player.isAttacking) {
       player.isAttacking = false
-    console.log("go")
+      enemy.health -= 20
+    document.getElementById("enemyBar").style.width = enemy.health.toString() + "%"
   }
 
   if (rectangularCollision({rectangle1:enemy, rectangle2:player}) && 
   enemy.isAttacking) {
     enemy.isAttacking = false
-  console.log("go2")
+    player.health -= 20
+    document.getElementById("playerBar").style.width = player.health.toString() + "%"
 }
 
   
@@ -188,7 +191,7 @@ window.addEventListener("keydown", event => {
       enemy.velocity.y = -20
       break
     case "ArrowDown":
-      enemy.isAttacking = true
+      enemy.attack()
       break
   }
 })
