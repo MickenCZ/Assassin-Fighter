@@ -8,70 +8,16 @@ ctx.fillRect(0, 0, canvas.width, canvas.height)
 const gravity = 0.7
 let gameHasEnded = false
 
-class Sprite {
-  constructor({position, velocity, color = "red", offset}) {
-    this.position = position
-    this.velocity = velocity
-    this.width = 50
-    this.height = 150
-    this.lastKey
-    this.color = color
-    this.attackBox = {
-      position: {
-        x: this.position.x,
-        y: this.position.y
-      },
-      offset: offset,
-      width: 100,
-      height: 50,
-    },
-    this.health = 100
-    this.isAttacking
-  }
+const background = new Sprite({
+  position: {
+    x: 0,
+    y : 0,
+  },
+  imageSrc: "../static/background.png"
+})
 
-  draw() {
-    //player and enemy
-    ctx.fillStyle = this.color
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
 
-    //attack box
-    if (this.isAttacking) {
-      ctx.fillStyle = "green"
-      ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-    }
-  }
-  update() {
-    this.draw()
-    this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-    this.attackBox.position.y = this.position.y
-
-    //this prevents it from going off-screen right or left
-    if ((this.position.x + this.velocity.x + this.width <= canvas.width) && (this.position.x + this.velocity.x >= 0)) {
-      this.position.x += this.velocity.x
-    }
-    //this moves the character up
-    this.position.y += this.velocity.y
-
-    //prevents the players from falling down
-    if (this.position.y + this.height + this.velocity.y >= canvas.height) {
-      this.velocity.y = 0
-    }
-    else {
-      this.velocity.y += gravity
-    }
-  }
-  
-  attack() {
-    if (!gameHasEnded) {
-      this.isAttacking = true
-      setTimeout(() => {//stops attacking after 0.1 s
-        this.isAttacking = false
-      }, 100)
-    }
-  }
-}
-
-const player = new Sprite({
+const player = new Fighter({
   position:{
     x: 0,
     y: 0,
@@ -86,7 +32,7 @@ const player = new Sprite({
   },
 })
 
-const enemy = new Sprite({
+const enemy = new Fighter({
   position: {
     x: 400,
     y: 100,
@@ -120,50 +66,14 @@ const keys = {
   }
 }
 
-function rectangularCollision({rectangle1, rectangle2}) {
-  return (rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x && 
-    rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width &&
-    rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y &&
-    rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height)
-}
-
-function determineWinner({player, enemy, timerID}) {
-  gameHasEnded = true
-  clearTimeout(timerID)
-  document.getElementById("label").style.display = "flex"
-  if (player.health === enemy.health) {
-    document.getElementById("label").innerHTML = "Nerozhodně"
-  }
-  else if (player.health > enemy.health) {
-    document.getElementById("label").innerHTML = "Vyhrál hráč 1"
-  }
-  else if (player.health < enemy.health) {
-    document.getElementById("label").innerHTML = "Vyhrál hráč 2"
-  }
-
-}
-
-let timer = 10
-let timerID
-function decreaseTimer() {
-  if (timer > 0) {
-    timerID = setTimeout(decreaseTimer, 1000)
-    timer--
-    document.getElementById("timer").innerHTML = timer.toString()
-  }
-  
-  if (timer === 0) {
-    determineWinner({player, enemy, timerID})
-  }
-}
-
 decreaseTimer()
 
 function animate() {
-  //endless loop that calls code that handles object interaction and paints the canvas using the draw method of the Sprite class
+  //endless loop that calls code that handles object interaction and paints the canvas using the draw method of the Fighter class
   window.requestAnimationFrame(animate)
   ctx.fillStyle = "black"
   ctx.fillRect(0, 0, canvas.width, canvas.height)
+  background.update()
   player.update()
   enemy.update()
   /*For each frame it resets the canvas to just black, and then draws new frame by updating the objects*/
