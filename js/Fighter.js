@@ -9,7 +9,7 @@ class Fighter extends Sprite {
     })
     this.framesCurrent = 0
     this.framesElapsed = 0
-    this.framesHold = 10
+    this.framesHold = 17
     this.velocity = velocity
     this.width = 50
     this.height = 150
@@ -31,6 +31,8 @@ class Fighter extends Sprite {
   
   update() {
     this.draw()
+    this.animateFrames()
+
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x
     this.attackBox.position.y = this.position.y
 

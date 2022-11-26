@@ -28,10 +28,10 @@ const player = new Fighter({
   },
   offset: {
     x: 0,
-    y: -50,
+    y: -20,
   },
-  imageSrc: "../static/Idle.png",
-  framesMax: 1,
+  imageSrc: "../static/IdleTest.png",
+  framesMax: 6,
   scale: 5
 })
 

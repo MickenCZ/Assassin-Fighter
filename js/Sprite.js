@@ -28,6 +28,10 @@ class Sprite {
   }
   update() {
     this.draw()
+    this.animateFrames()
+  }
+
+  animateFrames() {
     this.framesElapsed++
     if (this.framesElapsed % this.framesHold === 0) {
       //for every nth frame (n = framesHold) it carries out the animation
