@@ -6,6 +6,7 @@ canvas.height = 576
 ctx.fillRect(0, 0, canvas.width, canvas.height)
 //Draws initial canvas
 const gravity = 0.7
+let gameHasEnded = false
 
 class Sprite {
   constructor({position, velocity, color = "red", offset}) {
@@ -43,9 +44,15 @@ class Sprite {
     this.draw()
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x
     this.attackBox.position.y = this.position.y
-    this.position.x += this.velocity.x
+
+    //this prevents it from going off-screen right or left
+    if ((this.position.x + this.velocity.x + this.width <= canvas.width) && (this.position.x + this.velocity.x >= 0)) {
+      this.position.x += this.velocity.x
+    }
+    //this moves the character up
     this.position.y += this.velocity.y
 
+    //prevents the players from falling down
     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
       this.velocity.y = 0
     }
@@ -55,10 +62,12 @@ class Sprite {
   }
   
   attack() {
-    this.isAttacking = true
-    setTimeout(() => {//stops attacking after 0.1 s
-      this.isAttacking = false
-    }, 100)
+    if (!gameHasEnded) {
+      this.isAttacking = true
+      setTimeout(() => {//stops attacking after 0.1 s
+        this.isAttacking = false
+      }, 100)
+    }
   }
 }
 
@@ -119,6 +128,7 @@ function rectangularCollision({rectangle1, rectangle2}) {
 }
 
 function determineWinner({player, enemy, timerID}) {
+  gameHasEnded = true
   clearTimeout(timerID)
   document.getElementById("label").style.display = "flex"
   if (player.health === enemy.health) {
@@ -130,6 +140,7 @@ function determineWinner({player, enemy, timerID}) {
   else if (player.health < enemy.health) {
     document.getElementById("label").innerHTML = "Vyhrál hráč 2"
   }
+
 }
 
 let timer = 10
@@ -149,6 +160,7 @@ function decreaseTimer() {
 decreaseTimer()
 
 function animate() {
+  //endless loop that calls code that handles object interaction and paints the canvas using the draw method of the Sprite class
   window.requestAnimationFrame(animate)
   ctx.fillStyle = "black"
   ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -194,6 +206,7 @@ function animate() {
 
 animate()
 
+//this activates once you start holding the key
 window.addEventListener("keydown", event => {
   switch (event.key) {
     case "d":
@@ -228,6 +241,7 @@ window.addEventListener("keydown", event => {
   }
 })
 
+//this activates once you stop holding the key
 window.addEventListener("keyup", event => {
   switch (event.key) {
     case "d":
