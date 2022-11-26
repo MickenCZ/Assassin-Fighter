@@ -28,8 +28,11 @@ const player = new Fighter({
   },
   offset: {
     x: 0,
-    y: 0,
+    y: -50,
   },
+  imageSrc: "../static/Idle.png",
+  framesMax: 1,
+  scale: 5
 })
 
 const enemy = new Fighter({
@@ -43,9 +46,12 @@ const enemy = new Fighter({
   },
   offset: {
     x: -50,
-    y: 0,
+    y: -50,
   },
-  color:"blue"
+  color:"blue",
+  imageSrc: "../static/Idle.png",
+  framesMax: 1,
+  scale:5
 })
 
 const keys = {
