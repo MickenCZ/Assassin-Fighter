@@ -30,10 +30,24 @@ const player = new Fighter({
     x: 0,
     y: -20,
   },
-  imageSrc: "../static/IdleTest.png",
+  imageSrc: "../static/Idle.png",
   framesMax: 6,
-  scale: 5
+  scale: 5,
+  sprites: {
+    idle: {
+      imageSrc: "../static/Idle.png",
+      framesMax: 6,
+    },
+    run: {
+      imageSrc: "../static/Run.png",
+      framesMax: 8,
+    }
+  },
+  currentAnimationState: "idle"
 })
+
+  player.framesMax = player.sprites[player.currentAnimationState].framesMax
+  player.image = player.sprites[player.currentAnimationState].image
 
 const enemy = new Fighter({
   position: {
@@ -46,12 +60,22 @@ const enemy = new Fighter({
   },
   offset: {
     x: -50,
-    y: -50,
+    y: -20,
   },
   color:"blue",
   imageSrc: "../static/Idle.png",
-  framesMax: 1,
-  scale:5
+  framesMax: 6,
+  scale:5,
+  sprites: {
+    run: {
+      imageSrc: "../static/Run.png",
+      framesMax: 8,
+    },
+    idle: {
+      imageSrc: "../static/Idle.png",
+      framesMax: 6,
+    },
+  }
 })
 
 const keys = {
@@ -83,13 +107,20 @@ function animate() {
   player.update()
   enemy.update()
   /*For each frame it resets the canvas to just black, and then draws new frame by updating the objects*/
+  
   //player movement
   player.velocity.x = 0
+  player.image = player.sprites.idle.image
+  player.framesMax = player.sprites.idle.framesMax
   if (keys.a.pressed && player.lastKey === "a") {
     player.velocity.x = -5
+    player.framesMax = player.sprites.run.framesMax
+    player.image = player.sprites.run.image
   }
   else if (keys.d.pressed && player.lastKey === "d") {
     player.velocity.x = 5
+    player.framesMax = player.sprites.run.framesMax
+    player.image = player.sprites.run.image
   }
   //enemy movement
   enemy.velocity.x = 0

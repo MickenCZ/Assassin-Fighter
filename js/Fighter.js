@@ -1,5 +1,14 @@
 class Fighter extends Sprite {
-  constructor({position, velocity, color = "red", imageSrc, scale = 1, framesMax = 1, offset = {x:0,y:0}}) {
+  constructor({position,
+    velocity,
+    color = "red",
+    imageSrc,
+    scale = 1,
+    framesMax = 1,
+    offset = {x:0,y:0},
+    sprites,
+    currentAnimationState
+  }) {
     super({
       position,
       imageSrc,
@@ -10,6 +19,7 @@ class Fighter extends Sprite {
     this.framesCurrent = 0
     this.framesElapsed = 0
     this.framesHold = 17
+    this.sprites = sprites
     this.velocity = velocity
     this.width = 50
     this.height = 150
@@ -26,6 +36,15 @@ class Fighter extends Sprite {
     },
     this.health = 100
     this.isAttacking
+    this.currentAnimationState = currentAnimationState
+
+    for (const sprite in this.sprites) {
+      this.framesMax = this.sprites[sprite].framesMax
+      sprites[sprite].image = new Image()
+      sprites[sprite].image.src = sprites[sprite].imageSrc
+    }
+
+
   }
 
   
