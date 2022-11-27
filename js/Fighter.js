@@ -70,7 +70,11 @@ class Fighter extends Sprite {
     }
     
     //this moves the character up
-    this.position.y += this.velocity.y
+    if (this.position.y + this.velocity.y >= 50) {
+      this.position.y += this.velocity.y
+    } else {
+      this.velocity.y = 0
+    }
 
     //prevents the players from falling down
     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
@@ -85,13 +89,13 @@ class Fighter extends Sprite {
   
   attack() {
     this.switchSprite("attack1")
-    if (!gameHasEnded) {
+    if (!gameHasEnded && !this.dead) {
       this.isAttacking = true
     }
   }
 
   takeHit() {
-    this.health -= 20
+    this.health -= 10
 
     if (this.health <= 0) {
       this.switchSprite("death")

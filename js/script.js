@@ -140,7 +140,7 @@ const keys = {
     pressed:false
   },
   ArrowLeft: {
-    pressed:false
+    pressed: false
   },
   ArrowRight: {
     pressed: false
