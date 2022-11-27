@@ -72,6 +72,7 @@ class Fighter extends Sprite {
   }
   
   attack() {
+    this.switchSprite("attack1")
     if (!gameHasEnded) {
       this.isAttacking = true
       setTimeout(() => {//stops attacking after 0.1 s
@@ -81,6 +82,10 @@ class Fighter extends Sprite {
   }
 
   switchSprite(sprite) {
+    if (this.image === this.sprites.attack1.image && this.framesCurrent < this.sprites.attack1.framesMax - 1) {
+      return
+      //if attacking, continue the animation even if you start falling or moving. Also, stop it if you have already activated it once (Second condition)
+    }
     switch (sprite) {
       case "idle":
         if (this.image !== this.sprites.idle.image) { //prevent re-renders
@@ -107,6 +112,13 @@ class Fighter extends Sprite {
         if (this.image !== this.sprites.fall.image) {
           this.framesMax = this.sprites.fall.framesMax
           this.image = this.sprites.fall.image
+          this.framesCurrent = 0
+        }
+        break;
+      case "attack1":
+        if (this.image !== this.sprites.attack1.image) {
+          this.framesMax = this.sprites.attack1.framesMax
+          this.image = this.sprites.attack1.image
           this.framesCurrent = 0
         }
         break;
