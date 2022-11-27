@@ -41,6 +41,10 @@ const player = new Fighter({
     run: {
       imageSrc: "../static/Run.png",
       framesMax: 8,
+    },
+    jump: {
+      imageSrc: "../static/Jump.png",
+      framesMax: 4,
     }
   },
   currentAnimationState: "idle"
@@ -122,6 +126,13 @@ function animate() {
     player.framesMax = player.sprites.run.framesMax
     player.image = player.sprites.run.image
   }
+
+  if (player.velocity.y < 0) {
+    player.image = player.sprites.jump.image
+    player.framesMax = player.sprites.jump.framesMax
+  }
+
+
   //enemy movement
   enemy.velocity.x = 0
   if (keys.ArrowLeft.pressed && enemy.lastKey === "ArrowLeft") {
