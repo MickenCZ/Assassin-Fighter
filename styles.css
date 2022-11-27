@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+
 #playerHealth, #enemyHealth {
   background-color: darkred;
   height: 30px;
@@ -13,6 +20,7 @@
 #main {
   position: relative;
   display: inline-block;
+  width: 1024px;
 }
 
 #ui {
