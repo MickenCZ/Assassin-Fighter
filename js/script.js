@@ -49,13 +49,10 @@ const player = new Fighter({
     fall: {
       imageSrc: "../static/Fall.png",
       framesMax: 4,
-    }
-  },
-  currentAnimationState: "idle"
-})
+    },
 
-  player.framesMax = player.sprites[player.currentAnimationState].framesMax
-  player.image = player.sprites[player.currentAnimationState].image
+  },
+})
 
 const enemy = new Fighter({
   position: {

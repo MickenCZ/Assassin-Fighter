@@ -7,7 +7,6 @@ class Fighter extends Sprite {
     framesMax = 1,
     offset = {x:0,y:0},
     sprites,
-    currentAnimationState
   }) {
     super({
       position,
@@ -36,7 +35,6 @@ class Fighter extends Sprite {
     },
     this.health = 100
     this.isAttacking
-    this.currentAnimationState = currentAnimationState
 
     for (const sprite in this.sprites) {
       this.framesMax = this.sprites[sprite].framesMax
