@@ -65,9 +65,11 @@ class Fighter extends Sprite {
     //prevents the players from falling down
     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
       this.velocity.y = 0
+      this.position.y = 426 //stops it from micro falling CHANGE IF YOU CHANGE FLOOR
     }
     else {
       this.velocity.y += gravity
+      //console.log(this.position.y)
     }
   }
   
@@ -77,6 +79,39 @@ class Fighter extends Sprite {
       setTimeout(() => {//stops attacking after 0.1 s
         this.isAttacking = false
       }, 100)
+    }
+  }
+
+  switchSprite(sprite) {
+    switch (sprite) {
+      case "idle":
+        if (this.image !== this.sprites.idle.image) { //prevent re-renders
+          this.framesMax = this.sprites.idle.framesMax
+          this.image = this.sprites.idle.image
+          this.framesCurrent = 0
+        }
+        break;
+      case "run":
+        if (this.image !== this.sprites.run.image) {
+          this.framesMax = this.sprites.run.framesMax
+          this.image = this.sprites.run.image
+          this.framesCurrent = 0
+        }
+        break;
+      case "jump":
+        if (this.image !== this.sprites.jump.image) {
+          this.framesMax = this.sprites.jump.framesMax
+          this.image = this.sprites.jump.image
+          this.framesCurrent = 0
+        }
+        break;
+      case "fall":
+        if (this.image !== this.sprites.fall.image) {
+          this.framesMax = this.sprites.fall.framesMax
+          this.image = this.sprites.fall.image
+          this.framesCurrent = 0
+        }
+        break;
     }
   }
 }
