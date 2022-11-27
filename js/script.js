@@ -208,7 +208,9 @@ function animate() {
   player.isAttacking && player.framesCurrent === 1) {
       enemy.takeHit()
       player.isAttacking = false
-    document.getElementById("enemyBar").style.width = enemy.health.toString() + "%"
+      gsap.to("#enemyBar", {//animate health bar decrease
+      width: enemy.health.toString() + "%",
+    })
   }
 
   // if player misses
@@ -226,7 +228,9 @@ function animate() {
   enemy.isAttacking && enemy.framesCurrent === 0) {
     player.takeHit()
     enemy.isAttacking = false
-    document.getElementById("playerBar").style.width = player.health.toString() + "%"
+    gsap.to("#playerBar", {//animate health bar decrease
+      width: player.health.toString() + "%",
+    })
 }
 
     if (enemy.health <= 0 || player.health <= 0) {

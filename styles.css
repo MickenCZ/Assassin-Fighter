@@ -5,7 +5,7 @@
 }
 
 #playerHealth, #enemyHealth {
-  background-color: yellow;
+  background-color: darkred;
   height: 30px;
   width: 100%;
 }
@@ -24,19 +24,21 @@
 }
 
 #timer {
-  background-color: red;
+  background-color: black;
   width: 100px;
-  height: 100px;
+  height: 50px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-
+  color: rgb(200, 200, 200);
+  border: 4px solid rgb(200, 200, 200);
+  font-family: 'Press Start 2P', cursive;
 }
 
 #playerBar {
   position: absolute;
-  background-color: blue;
+  background-color: #818CF8;
   top:0;
   bottom: 0;
   right: 0;
@@ -45,7 +47,7 @@
 
 #enemyBar {
   position: absolute;
-  background-color: blue;
+  background-color: #818CF8;
   top:0;
   bottom: 0;
   right: 0;
@@ -54,13 +56,19 @@
 
 .placeHolderParent {
   position: relative;
-  height: 30px;
   width: 100%;
 }
 
-#playerParent {
+.playerParent {
   display: flex;
   justify-content: flex-end;
+  border: 4px solid rgb(200, 200, 200);
+  border-right: none;
+}
+
+.enemyParent {
+  border: 4px solid rgb(200, 200, 200);
+  border-left: none;
 }
 
 #label {
@@ -73,5 +81,6 @@
   right:0;
   bottom:0;
   left:0;
+  font-family: 'Press Start 2P', cursive;
   /*Makes it expand throughout the entire canvas and centers it without need for wrapper*/
 }
