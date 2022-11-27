@@ -83,11 +83,20 @@ class Fighter extends Sprite {
     }
   }
 
+  takeHit() {
+    this.health -= 20
+    this.switchSprite("takeHit")
+  }
+
   switchSprite(sprite) {
+    //overwriting all other animations
     if (this.image === this.sprites.attack1.image && this.framesCurrent < this.sprites.attack1.framesMax - 1) {
       return
       //if attacking, continue the animation even if you start falling or moving. Also, stop it if you have already activated it once (Second condition)
     }
+    //if taking hit, dont switch animations to anything but attack
+    if (this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax - 1) {return}
+
     switch (sprite) {
       case "idle":
         if (this.image !== this.sprites.idle.image) { //prevent re-renders
@@ -123,6 +132,11 @@ class Fighter extends Sprite {
           this.image = this.sprites.attack1.image
           this.framesCurrent = 0
         }
+        break;
+      case "takeHit":
+          this.framesMax = this.sprites.takeHit.framesMax
+          this.image = this.sprites.takeHit.image
+          this.framesCurrent = 1
         break;
     }
   }
