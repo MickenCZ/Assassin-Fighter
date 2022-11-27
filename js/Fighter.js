@@ -65,9 +65,10 @@ class Fighter extends Sprite {
     //ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
 
     //this prevents it from going off-screen right or left
-    if ((this.position.x + this.velocity.x + this.width <= canvas.width) && (this.position.x + this.velocity.x >= 0)) {
+    if ((this.position.x + this.velocity.x + this.width + 155 <= canvas.width) && (this.position.x + this.velocity.x >= 0)) {
       this.position.x += this.velocity.x
     }
+    
     //this moves the character up
     this.position.y += this.velocity.y
 
