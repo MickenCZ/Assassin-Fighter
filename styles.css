@@ -108,6 +108,7 @@ body {
   flex-direction: column;
 }
 
-#description {
+#description, #tip {
   font-size: 20px;
 }
+
