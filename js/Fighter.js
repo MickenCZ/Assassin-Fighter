@@ -36,6 +36,7 @@ class Fighter extends Sprite {
     },
     this.health = 100
     this.isAttacking
+    this.dead = false
 
     for (const sprite in this.sprites) {
       this.framesMax = this.sprites[sprite].framesMax
@@ -49,7 +50,12 @@ class Fighter extends Sprite {
   
   update() {
     this.draw()
-    this.animateFrames()
+    if (!this.dead) {//if dead and on last frame of death, stop animating
+      this.animateFrames()
+    } else {
+      if (this.framesCurrent !== 11)
+      this.animateFrames()
+    }
 
     //attack boxes
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x
@@ -85,11 +91,22 @@ class Fighter extends Sprite {
 
   takeHit() {
     this.health -= 20
-    this.switchSprite("takeHit")
+
+    if (this.health <= 0) {
+      this.switchSprite("death")
+    } else {
+      this.switchSprite("takeHit")
+    }
   }
 
   switchSprite(sprite) {
-    //overwriting all other animations
+    //overwriting all other animations)
+
+    if (this.image === this.sprites.death.image && this.framesCurrent < this.sprites.death.framesMax - 1) {
+        this.dead = true
+      return
+    }
+
     if (this.image === this.sprites.attack1.image && this.framesCurrent < this.sprites.attack1.framesMax - 1) {
       return
       //if attacking, continue the animation even if you start falling or moving. Also, stop it if you have already activated it once (Second condition)
@@ -137,7 +154,12 @@ class Fighter extends Sprite {
           this.framesMax = this.sprites.takeHit.framesMax
           this.image = this.sprites.takeHit.image
           this.framesCurrent = 1
-        break;
+          break;
+      case "death":
+          this.framesMax = this.sprites.death.framesMax
+          this.image = this.sprites.death.image
+          this.framesCurrent = 1
+          break;
     }
   }
 }
