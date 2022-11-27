@@ -7,6 +7,7 @@ class Fighter extends Sprite {
     framesMax = 1,
     offset = {x:0,y:0},
     sprites,
+    attackBox = {offset: {}, width: undefined, height: undefined},
   }) {
     super({
       position,
@@ -29,9 +30,9 @@ class Fighter extends Sprite {
         x: this.position.x,
         y: this.position.y
       },
-      offset: offset,
-      width: 100,
-      height: 50,
+      offset: attackBox.offset,
+      width: attackBox.width,
+      height: attackBox.height,
     },
     this.health = 100
     this.isAttacking
@@ -50,8 +51,12 @@ class Fighter extends Sprite {
     this.draw()
     this.animateFrames()
 
+    //attack boxes
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-    this.attackBox.position.y = this.position.y
+    this.attackBox.position.y = this.position.y + this.attackBox.offset.y
+
+    //draw attack box
+    //ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
 
     //this prevents it from going off-screen right or left
     if ((this.position.x + this.velocity.x + this.width <= canvas.width) && (this.position.x + this.velocity.x >= 0)) {
@@ -75,9 +80,6 @@ class Fighter extends Sprite {
     this.switchSprite("attack1")
     if (!gameHasEnded) {
       this.isAttacking = true
-      setTimeout(() => {//stops attacking after 0.1 s
-        this.isAttacking = false
-      }, 100)
     }
   }
 
