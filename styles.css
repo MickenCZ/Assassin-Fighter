@@ -82,5 +82,12 @@
   bottom:0;
   left:0;
   font-family: 'Press Start 2P', cursive;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   /*Makes it expand throughout the entire canvas and centers it without need for wrapper*/
+}
+
+#gameOver {
+  padding-bottom: 10px;
 }

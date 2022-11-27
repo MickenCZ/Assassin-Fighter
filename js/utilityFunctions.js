@@ -10,13 +10,13 @@ function determineWinner({player, enemy, timerID}) {
   clearTimeout(timerID)
   document.getElementById("label").style.display = "flex"
   if (player.health === enemy.health) {
-    document.getElementById("label").innerHTML = "Nerozhodně"
+    document.getElementById("whoWon").innerHTML = "Nerozhodně"
   }
   else if (player.health > enemy.health) {
-    document.getElementById("label").innerHTML = "Vyhrál hráč 1"
+    document.getElementById("whoWon").innerHTML = "Vyhrál červený hráč"
   }
   else if (player.health < enemy.health) {
-    document.getElementById("label").innerHTML = "Vyhrál hráč 2"
+    document.getElementById("whoWon").innerHTML = "Vyhrál zelený hráč"
   }
 
 }
