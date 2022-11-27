@@ -70,28 +70,28 @@ const enemy = new Fighter({
     x: -50,
     y: -20,
   },
-  imageSrc: "../static/Idle.png",
+  imageSrc: "../static/IdleEnemy.png",
   framesMax: 6,
   scale: 5,
   sprites: {
     idle: {
-      imageSrc: "../static/Idle.png",
+      imageSrc: "../static/IdleEnemy.png",
       framesMax: 6,
     },
     run: {
-      imageSrc: "../static/Run.png",
+      imageSrc: "../static/RunEnemy.png",
       framesMax: 8,
     },
     jump: {
-      imageSrc: "../static/Jump.png",
+      imageSrc: "../static/JumpEnemy.png",
       framesMax: 4,
     },
     fall: {
-      imageSrc: "../static/Fall.png",
+      imageSrc: "../static/FallEnemy.png",
       framesMax: 4,
     },
     attack1: {
-      imageSrc: "../static/Attack1.png",
+      imageSrc: "../static/Attack1Enemy.png",
       framesMax: 4,
     },
   },
