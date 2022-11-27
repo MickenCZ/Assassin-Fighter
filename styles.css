@@ -91,3 +91,15 @@
 #gameOver {
   padding-bottom: 10px;
 }
+
+#controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1024px;
+  flex-direction: column;
+}
+
+#description {
+  font-size: 20px;
+}

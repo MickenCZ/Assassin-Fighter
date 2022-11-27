@@ -14,14 +14,16 @@ function determineWinner({player, enemy, timerID}) {
   }
   else if (player.health > enemy.health) {
     document.getElementById("whoWon").innerHTML = "Vyhrál červený hráč"
+    enemy.switchSprite("death")
   }
   else if (player.health < enemy.health) {
     document.getElementById("whoWon").innerHTML = "Vyhrál zelený hráč"
+    player.switchSprite("death")
   }
 
 }
 
-let timer = 25
+let timer = 30
 let timerID
 function decreaseTimer() {
   if (timer > 0) {
