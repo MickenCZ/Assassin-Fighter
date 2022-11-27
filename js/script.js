@@ -70,18 +70,17 @@ const enemy = new Fighter({
     x: -50,
     y: -20,
   },
-  color:"blue",
   imageSrc: "../static/Idle.png",
   framesMax: 6,
-  scale:5,
+  scale: 5,
   sprites: {
-    run: {
-      imageSrc: "../static/Run.png",
-      framesMax: 8,
-    },
     idle: {
       imageSrc: "../static/Idle.png",
       framesMax: 6,
+    },
+    run: {
+      imageSrc: "../static/Run.png",
+      framesMax: 8,
     },
     jump: {
       imageSrc: "../static/Jump.png",
@@ -90,8 +89,12 @@ const enemy = new Fighter({
     fall: {
       imageSrc: "../static/Fall.png",
       framesMax: 4,
-    }
-  }
+    },
+    attack1: {
+      imageSrc: "../static/Attack1.png",
+      framesMax: 4,
+    },
+  },
 })
 
 const keys = {
@@ -150,9 +153,22 @@ function animate() {
   enemy.velocity.x = 0
   if (keys.ArrowLeft.pressed && enemy.lastKey === "ArrowLeft") {
     enemy.velocity.x = -5
+    enemy.switchSprite("run")
   }
   else if (keys.ArrowRight.pressed && enemy.lastKey === "ArrowRight") {
     enemy.velocity.x = 5
+    enemy.switchSprite("run")
+  }
+  else {
+    enemy.switchSprite("idle")
+  }
+
+  //jumping
+  if (enemy.velocity.y < 0) {
+    enemy.switchSprite("jump")
+  }
+  else if (enemy.velocity.y > 0) {
+    enemy.switchSprite("fall")
   }
 
   //detect collision
