@@ -100,7 +100,7 @@ body {
   padding-bottom: 10px;
 }
 
-#controls {
+.controls {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,7 +108,7 @@ body {
   flex-direction: column;
 }
 
-#description, #tip {
+.description, .tip {
   font-size: 20px;
 }
 
