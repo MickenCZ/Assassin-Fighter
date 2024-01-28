@@ -149,9 +149,13 @@ const keys = {
 
 decreaseTimer()
 
+const FPS = 80
+
 function animate() {
   //endless loop that calls code that handles object interaction and paints the canvas using the draw method of the Fighter class
-  window.requestAnimationFrame(animate)
+  setTimeout(() => {
+    window.requestAnimationFrame(animate);
+  }, 1000 / FPS);
   ctx.fillStyle = "black"
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   background.update()
