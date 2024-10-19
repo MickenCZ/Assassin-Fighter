@@ -260,6 +260,7 @@ window.addEventListener("keydown", event => {
         player.velocity.y = -20
         break
       case " ": //spacebar
+        event.preventDefault()
         player.attack()
         break
     }}
@@ -274,9 +275,11 @@ window.addEventListener("keydown", event => {
           enemy.lastKey = "ArrowLeft"
           break
         case "ArrowUp":
+          event.preventDefault()
           enemy.velocity.y = -20
           break
         case "ArrowDown":
+          event.preventDefault()
           enemy.attack()
           break
       }
